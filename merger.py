@@ -8,10 +8,13 @@ name = str(input())
 files = []
 
 for file in listdir(directory):
-    if file.endswith('pdf'):
+    if file.endswith('pdf') and 'chapter' not in file:
         files.append(path.join(directory, file))
 
 files.sort(key=path.getctime)
+
+if not files[-1].startswith('Scan'):
+    files = files[-1:] + files[:-1]
 
 pdf = Pdf.new()
 
